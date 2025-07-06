@@ -18,7 +18,7 @@ public class AccountRepository {
     public AccountRepository(Application application) {
         AccountDatabase db = AccountDatabase.getDatabase(application);
         accountDAO = db.accountDAO();
-        allAccounts = accountDAO.getAllStudent();
+        allAccounts = accountDAO.getAllAccount();
     }
 
 

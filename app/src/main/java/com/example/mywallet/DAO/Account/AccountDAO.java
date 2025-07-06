@@ -26,5 +26,5 @@ public interface AccountDAO {
     void deleteAll();
 
     @Query("SELECT * FROM tblTaiKhoan ORDER BY name ASC")
-    LiveData<List<Account>> getAllStudent();
+    LiveData<List<Account>> getAllAccount();
 }
