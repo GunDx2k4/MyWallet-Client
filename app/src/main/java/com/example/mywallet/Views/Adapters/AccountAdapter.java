@@ -2,7 +2,6 @@ package com.example.mywallet.Views.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,6 @@ public class AccountAdapter  extends RecyclerView.Adapter<AccountAdapter.Account
         holder.txtAccountName.setText(account.getName());
 
         // Format số dư
-        DecimalFormat decimalFormat = new DecimalFormat("#,###");
         holder.txtBalance.setText(String.format("%,.0f VND", account.getBalance()));
 
         // Xử lý sự kiện xóa

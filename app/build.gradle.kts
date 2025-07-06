@@ -57,4 +57,8 @@ dependencies {
     // Dagger/Hilt (Nếu bạn sử dụng Hilt cho Dependency Injection với Room)
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     annotationProcessor("androidx.hilt:hilt-compiler:1.0.0")
+
+    implementation("io.reactivex.rxjava2:rxjava:2.2.5")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.0")
+    implementation("com.github.NaikSoftware:StompProtocolAndroid:1.6.6")
 }

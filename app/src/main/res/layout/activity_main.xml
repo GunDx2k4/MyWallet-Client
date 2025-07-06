@@ -28,6 +28,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/them_tai_khoan_ngan_hang" />
+    <Button
+        android:id="@+id/btnSendRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send request" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAccounts"

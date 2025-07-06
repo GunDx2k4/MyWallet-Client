@@ -17,11 +17,20 @@ public class MainViewModel extends AndroidViewModel {
     private final AccountRepository repository;
     private final LiveData<List<Account>> allStudents;
     private final MutableLiveData<String> toastMessage = new MutableLiveData<>();
+    private final MutableLiveData<String> messageSocket = new MutableLiveData<>();
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         repository = new AccountRepository(application);
         allStudents = repository.getAllAccounts();
+    }
+
+    public void setMessage(String message) {
+        messageSocket.postValue(message);
+    }
+
+    public LiveData<String> getNotificationMessage() {
+        return messageSocket;
     }
 
     public LiveData<List<Account>> getAllStudents() {
