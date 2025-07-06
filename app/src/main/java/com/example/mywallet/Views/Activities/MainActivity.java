@@ -1,9 +1,10 @@
-package com.example.mywallet.Views;
+package com.example.mywallet.Views.Activities;
 
 
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,8 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -29,11 +32,7 @@ import com.example.mywallet.Views.Adapters.AccountAdapter;
 
 
 public class MainActivity extends AppCompatActivity {
-    private MainViewModel viewModel;
-    private EditText edtAccountName, edtBalance;
-    private Button btnSaveAccount, btnSendRequest;
-    private RecyclerView recyclerView;
-    private AccountAdapter adapter;
+    private ImageView imageView;
     private MyWebSocket myWebSocket;
 
     private static final String CHANNEL_ID = "websocket";
@@ -44,15 +43,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initUI();
-
         initViewModel();
+        observeData();
+        loadEvents();
 
         requestNotificationPermission();
         createNotificationChannel();
-
-        myWebSocket = new MyWebSocket(viewModel);
-        observeData();
-        loadEvents();
     }
 
     public void showNotification( String title, String message) {
@@ -101,42 +97,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-        adapter = new AccountAdapter(this, viewModel);
-        recyclerView.setAdapter(adapter);
     }
 
     private void initUI() {
-        edtAccountName = findViewById(R.id.edtAccountName);
-        edtBalance = findViewById(R.id.edtBalance);
-        btnSendRequest = findViewById(R.id.btnSendRequest);
-        btnSaveAccount = findViewById(R.id.btnSaveAccount);
-        recyclerView = findViewById(R.id.recyclerViewAccounts);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        imageView = findViewById(R.id.imageView);
     }
 
 
     private void observeData() {
-        viewModel.getToastMessage().observe(this, message -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
 
-        viewModel.getAllStudents().observe(this, accounts -> {
-            adapter.setAccounts(accounts);
-        });
-
-        viewModel.getNotificationMessage().observe(this, msg -> showNotification("Thông báo giao dịch mới", msg));
     }
 
     private void loadEvents() {
-        btnSaveAccount.setOnClickListener(v -> {
-            String accountName = edtAccountName.getText().toString().trim();
-            String balanceStr = edtBalance.getText().toString().trim();
-            viewModel.insert(accountName, balanceStr);
+        imageView.setOnClickListener(v -> {
+            Toast.makeText(MainActivity.this,"Tạo mới giao dịch",Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(MainActivity.this, TransactionActivity.class);
+            startActivity(intent);
         });
-
-        btnSendRequest.setOnClickListener(view ->
-                myWebSocket.send("/app/update-user", () -> {
-                    Log.d("STOMP", "Đã gửi update-user");
-                }));
     }
 }

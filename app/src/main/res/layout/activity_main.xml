@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="50dp"
-    tools:context="Views.MainActivity">
+    android:padding="16dp"
+    tools:context=".Views.Activities.MainActivity">
 
-    <EditText
-        android:id="@+id/edtAccountName"
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/ten_tai_khoan_ngan_hang"
-        android:minHeight="48dp" />
+        android:text="Quản lý tài chính cá nhân"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@color/blue_background"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/edtBalance"
+    <!-- Fragment Container -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/so_tien_ban_dau"
-        android:inputType="numberDecimal"
-        android:minHeight="48dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btnSaveAccount"
+    <!-- Thêm giao dịch (ImageView) không chiếm diện tích của Fragment -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/them_tai_khoan_ngan_hang" />
-    <Button
-        android:id="@+id/btnSendRequest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Send request" />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="59dp"
+            android:layout_height="57dp"
+            android:layout_gravity="start"
+            android:contentDescription="Thêm giao dịch"
+            app:srcCompat="@drawable/add" />
+    </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewAccounts"
+    <!-- Thanh điều hướng -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        tools:listitem="@layout/item_account"/>
+        android:background="@color/button_background"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>
